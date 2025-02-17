@@ -1,44 +1,21 @@
 services:
   safe_heaven_backend:
     container_name: safe_heaven_backend
-    build: ../safe_heaven_backend
+    image: safe_heaven_backend:latest
     env_file: "./compose.env"
     depends_on:
       - postgres
     ports:
       - 42069:3000
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "10"
-    labels:
-      logging: "promtail"
-      logging_jobname: "containerlogs"
-      com.centurylinklabs.watchtower.enable: false
 
   safe_heaven_frontend:
     container_name: safe_heaven_frontend
+    image: safe_heaven_frontend:latest
     env_file: "./compose.env"
-    build:
-      context: ../safe_heaven_frontend
-      dockerfile: ../safe_heaven_frontend/Dockerfile
-      args:
-        HOST: ${HOST}
-        PORT: ${PORT}
     depends_on:
       - safe_heaven_backend
     ports:
       - 6969:80
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "10"
-    labels:
-      logging: "promtail"
-      logging_jobname: "containerlogs"
-      com.centurylinklabs.watchtower.enable: false
 
   postgres:
     container_name: postgres
@@ -58,15 +35,6 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "10"
-    labels:
-      logging: "promtail"
-      logging_jobname: "containerlogs"
-      com.centurylinklabs.watchtower.enable: false
 
 volumes:
   data:
