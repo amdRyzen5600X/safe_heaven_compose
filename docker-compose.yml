@@ -1,7 +1,7 @@
 services:
   safe_heaven_backend:
     container_name: safe_heaven_backend
-    image: safe_heaven_backend:latest
+    image: amdryzen7600x/safe_heaven_backend:latest
     env_file: "./compose.env"
     depends_on:
       - postgres
@@ -10,7 +10,7 @@ services:
 
   safe_heaven_frontend:
     container_name: safe_heaven_frontend
-    image: safe_heaven_frontend:latest
+    image: amdryzen7600x/safe_heaven_frontend:latest
     env_file: "./compose.env"
     depends_on:
       - safe_heaven_backend
