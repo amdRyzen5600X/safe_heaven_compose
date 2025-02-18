@@ -15,7 +15,7 @@ services:
     depends_on:
       - safe_heaven_backend
     ports:
-      - 6969:80
+      - 6969:443
 
   postgres:
     container_name: postgres
