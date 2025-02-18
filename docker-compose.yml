@@ -7,8 +7,6 @@ services:
       - postgres
     ports:
       - 42069:3000
-    volumes:
-      - ./certs/:/certs/
 
   safe_heaven_frontend:
     container_name: safe_heaven_frontend
@@ -17,9 +15,7 @@ services:
     depends_on:
       - safe_heaven_backend
     ports:
-      - 6969:443
-    volumes:
-      - ./certs/:/etc/nginx/certs/
+      - 6969:80
 
   postgres:
     container_name: postgres
